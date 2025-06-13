@@ -9,7 +9,7 @@ header:
 excerpt: "Run Java apps anywhere, anyway you want"
 ---
 
-{% include slot-machine.html %} 
+{#include partials/slot-machine.html /}
 
 <center><b>Take JBang for a spin, press copy and paste that command in your terminal.</b></center>
 
@@ -28,7 +28,7 @@ JBang is available on all major platforms, including Linux, macOS, and Windows.
 
 ### Anywhere
 
-With JBang, running Java has never been easier or more versatile! Whether you're a seasoned developer or just starting out, JBang offers a multitude of ways to get your Java applications up and running in no time. 
+With JBang, running Java has never been easier or more versatile! Whether you're a seasoned developer or just starting out, JBang offers a multitude of ways to get your Java applications up and running in no time.
 
 - **Directly from the Command Line**: Simply use `jbang yourfile.java` to run your Java files instantly.
 - **Using Scripts**: Embed dependencies directly in your scripts with `//DEPS` and run them effortlessly.
