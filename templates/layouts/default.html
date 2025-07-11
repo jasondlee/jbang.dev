@@ -12,6 +12,7 @@ related: false
   <head>
     {#include partials/head.html /}
     {#include partials/head/custom.html /}
+    {#bundle /}
   </head>
 
   <body class="layout--{layout ?: ''}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">

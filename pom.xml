@@ -6,16 +6,18 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <compiler-plugin.version>3.14.0</compiler-plugin.version>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.23.3</quarkus.platform.version>
         <skipITs>true</skipITs>
-        <surefire-plugin.version>3.5.3</surefire-plugin.version>
+
+        <version.compiler-plugin>3.14.0</version.compiler-plugin>
         <version.quarkus-roq>1.6.3</version.quarkus-roq>
+        <version.quarkus.platform>3.24.2</version.quarkus.platform>
+        <version.surefire-plugin>3.5.3</version.surefire-plugin>
     </properties>
 
     <dependencyManagement>
@@ -23,7 +25,7 @@
             <dependency>
                 <groupId>${quarkus.platform.group-id}</groupId>
                 <artifactId>${quarkus.platform.artifact-id}</artifactId>
-                <version>${quarkus.platform.version}</version>
+                <version>${version.quarkus.platform}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -32,29 +34,90 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-arc</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>io.quarkiverse.roq</groupId>
             <artifactId>quarkus-roq</artifactId>
+            <version>${version.quarkus-roq}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.roq</groupId>
+            <artifactId>quarkus-roq-plugin-markdown</artifactId>
+            <version>${version.quarkus-roq}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.roq</groupId>
+            <artifactId>quarkus-roq-plugin-asciidoc-jruby</artifactId>
+            <version>${version.quarkus-roq}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.roq</groupId>
+            <artifactId>quarkus-roq-plugin-aliases</artifactId>
+            <version>${version.quarkus-roq}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.roq</groupId>
+            <artifactId>quarkus-roq-plugin-tagging</artifactId>
             <version>${version.quarkus-roq}</version>
         </dependency>
 
         <dependency>
             <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-arc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkiverse.roq</groupId>
+            <artifactId>quarkus-roq-plugin-sitemap</artifactId>
+            <version>${version.quarkus-roq}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>io.quarkiverse.roq</groupId>
+            <artifactId>quarkus-roq-testing</artifactId>
+            <version>${version.quarkus-roq}</version>
+            <scope>test</scope>
+        </dependency>
+        -->
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>enforce-java</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>[${maven.compiler.release},)</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>${quarkus.platform.group-id}</groupId>
                 <artifactId>quarkus-maven-plugin</artifactId>
-                <version>${quarkus.platform.version}</version>
+                <version>${version.quarkus.platform}</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -69,14 +132,14 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${compiler-plugin.version}</version>
+                <version>${version.compiler-plugin}</version>
                 <configuration>
                     <parameters>true</parameters>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
+                <version>${version.surefire-plugin}</version>
                 <configuration>
                     <systemPropertyVariables>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
@@ -86,7 +149,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
+                <version>${version.surefire-plugin}</version>
                 <executions>
                     <execution>
                         <goals>
