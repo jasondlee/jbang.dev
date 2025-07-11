@@ -1,28 +1,26 @@
-{% capture logo_path %}{{ site.logo }}{% endcapture %}
+{! % capture logo_path %}{{ site.logo }}{% endcapture % !}
 
 <div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        {% unless logo_path == empty %}
-          <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt="{{ site.masthead_title | default: site.title }}"></a>
-        {% endunless %}
-        <a class="site-title" href="{{ '/' | relative_url }}">
-          {{ site.masthead_title | default: site.title }}
-          {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
+        <a class="site-logo" href="{site.url}"><img src="{cdi:metadata.logo}" alt="{cdi:metadata.masthead_title}"></a>
+        <a class="site-title" href="{site.url}">
+          {cdi:metadata.masthead_title}
+          <span class="site-subtitle">{cdi:metadata.subtitle}</span>
         </a>
         <ul class="visible-links">
-          {%- for link in site.data.navigation.main -%}
+          {#for link in cdi:navigation.main}
             <li class="masthead__menu-item">
-              <a href="{{ link.url | relative_url }}"{% if link.description %} title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
+              <a href="{link.url}">{link.title}</a>
             </li>
-          {%- endfor -%}
+          {/for}
         </ul>
-        {% if site.search == true %}
+        {#if cdi:metadata.search == true}
         <input id="search-input" type="text" placeholder="Search...">
-        {% endif %}
+        {/if}
         <button class="greedy-nav__toggle hidden" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
+          <span class="visually-hidden">Toggle menu</span>
           <div class="navicon"></div>
         </button>
         <ul class="hidden-links hidden"></ul>

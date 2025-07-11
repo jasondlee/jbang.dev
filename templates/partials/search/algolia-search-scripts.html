@@ -1,3 +1,4 @@
+{#let md=cdi:metadata}
 <!-- Including InstantSearch.js library and styling -->
 <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
 
@@ -7,10 +8,10 @@
 
 <script>
 var search = docsearch({
-   appId: '{{ site.algolia.application_id }}',
-  
-  apiKey:'{{ site.algolia.search_only_api_key }}',
-  indexName: '{{ site.algolia.index_name }}',
+   appId: '{md.algolia.application_id}',
+
+  apiKey:'{md.algolia.search_only_api_key }',
+  indexName: '{md.algolia.index_name }',
   inputSelector: '#search-input',
   algoliaOptions: { hitsPerPage: 10 }
 }).autocomplete

@@ -11,7 +11,7 @@ excerpt: "Lets Students, Educators and Professional Developers create, edit and 
 feature_row:
   - image_path: /assets/images/carbon-deps.png
     title: "Embedded Dependencies"
-    excerpt: "Automatic fetching of any dependency using `//DEPS group:artifact:version` 
+    excerpt: "Automatic fetching of any dependency using `//DEPS group:artifact:version`
               or `@Grab` annotations directly from the source code."
   - image_path: /assets/images/carbon-install.png
     title: "Install & Run Anywhere"
@@ -37,32 +37,21 @@ feature_row2:
     excerpt: "Easy editing in Intellij, Eclipse, Visual Studio Code, Apache Netbeans, vim and emacs. All with proper content assist and debug"
 ---
 
-{% include feature_row id="intro" type="center" %}
+{! #include partials/feature_row.html id="intro" type="center" !}
 
 <center>
-{% include slot-machine.html learn_more_url="/everywhere" %}
+{#include partials/slot-machine.html learn_more_url="/everywhere" /}
 </center>
 
-<hr>
+{#include partials/feature_row feature_row=page.data['feature_row'] /}
 
-{% include feature_row %}
+<h4>TODO: Fetch tweet
 
-<div class="feature__wrapper">
+{#include partials/feature_row feature_row=page.data['feature_row2'] /}
 
-{% assign rdtestimonials =site.data.testimonials | sample: 1 %}
-{% for tweet in rdtestimonials %}
-  {% twitter tweet hide_thread=true align=center width=350 %}
-{% endfor %}
-<center><a href="/testimonials" class="btn btn--primary">All Testimonials</a></center>
-</div>
-
-{% include feature_row id="feature_row2" %}
-
-
-    
 ### Watch <a name="watch"/>
-    
+
 Below is latest talk about JBang: "jbang - Unleash the power of Java"
- 
-<iframe width="1280" height="720" src="https://youtube.com/embed/cpKwBbz1sf0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-         
+
+<iframe width="1280" height="720" src="https://youtube.com/embed/cpKwBbz1sf0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
